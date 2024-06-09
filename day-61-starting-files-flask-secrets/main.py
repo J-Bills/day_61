@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import fields
 from wtforms.validators import DataRequired,Email,Length
 from flask_wtf.csrf import CSRFProtect
+from flask_bootstrap import Bootstrap4
 
 
 '''
@@ -27,6 +28,7 @@ class loginForm(FlaskForm):
 
 app = Flask(__name__)
 app.secret_key = "randomjunk"
+bootstrap = Bootstrap4(app)
 csrf = CSRFProtect(app)
 
 
