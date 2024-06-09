@@ -10,7 +10,7 @@
         <!-- This is where our form will go. -->
 		<form method="POST" action="{{url_for('login')}}" novalidate>
 			{{ form.csrf_token }}
-			<div>{{ form.password.label }} <br> {{ form.password(size=8) }}</div>
+			<div>{{ form.password.label }} <br> {{ form.password(size=12) }}</div>
 			{% if form.password.errors %}
         		{% for error in form.password.errors %}
 				<span style= "color:red"> {{ error }} </span>
