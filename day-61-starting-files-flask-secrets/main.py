@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect
 from flask_wtf import FlaskForm
 from wtforms import fields
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired,Email,Length
 from flask_wtf.csrf import CSRFProtect
 
 
@@ -18,9 +18,9 @@ pip3 install -r requirements.txt
 This will install the packages from requirements.txt for this project.
 '''
 
-class MyForm(FlaskForm):
-    password = fields.PasswordField(label='Password', validators=[DataRequired()])
-    email = fields.StringField(label='Email', validators=[DataRequired()])
+class loginForm(FlaskForm):
+    password = fields.PasswordField(label='Password', validators=[DataRequired(), Length(min=8, message='password too short')])
+    email = fields.StringField(label='Email', validators=[DataRequired(), Email()])
     submit = fields.SubmitField(label='Log in')
     
 
@@ -36,9 +36,8 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = MyForm()
-    if form.validate_on_submit():
-        return redirect('/success')
+    form = loginForm()
+    form.validate_on_submit()
     return render_template('login.html', form=form)
 
 
